@@ -67,7 +67,11 @@
 				<table>
 					<tr>
 						<td><app:img id="ZLoginErrorIcon" altkey='ALT_ERROR' src="dwt/ImgCritical_32.png" /></td>
-						<td id="errorMessage"></td>
+						<td id="errorMessage">
+							<% if (request.getAttribute("errorCode") != null) { %>
+								<fmt:message bundle="${zhmsg}" key='${errorCode}'/>
+							<% } %>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -147,5 +151,10 @@
 		return !isError;
 	}
 </script>
+<% if (request.getAttribute("errorCode") != null) { %>
+	<script>
+		document.getElementById("ZLoginErrorPanel").style.display = "block";
+	</script>
+<% } %>
 </body>
 </html>
