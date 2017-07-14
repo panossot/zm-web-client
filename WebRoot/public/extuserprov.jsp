@@ -63,14 +63,14 @@
 
 			<form action="/service/extuserprov/" method="post" onsubmit="return checkPasswords();">
 
-			<div id="ZLoginErrorPanel" style="display:none;">
+			<div id="ZLoginErrorPanel" style="${errorCode eq null ? 'display:none': 'display:block'}">
 				<table>
 					<tr>
 						<td><app:img id="ZLoginErrorIcon" altkey='ALT_ERROR' src="dwt/ImgCritical_32.png" /></td>
 						<td id="errorMessage">
-							<% if (request.getAttribute("errorCode") != null) { %>
+							<c:if test="${errorCode != null}"> 
 								<fmt:message bundle="${zhmsg}" key='${errorCode}'/>
-							<% } %>
+							</c:if>
 						</td>
 					</tr>
 				</table>
@@ -151,10 +151,5 @@
 		return !isError;
 	}
 </script>
-<% if (request.getAttribute("errorCode") != null) { %>
-	<script>
-		document.getElementById("ZLoginErrorPanel").style.display = "block";
-	</script>
-<% } %>
 </body>
 </html>
